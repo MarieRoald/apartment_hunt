@@ -59,8 +59,14 @@ with sqlite3.connect('boligdata.db') as connection:
 
     # Find apartments with balcony by selecting those with larger usable area compared
     # to primary area (bruksareal vs areal av primærrom).
-    console.print("We are also interested in apartments with a balcony.")
     console.print(Markdown("## The 10 cheapest apartments with a balcony"))
+    console.print(
+        "We are also interested in apartments with a balcony. "
+        "Unfortunately, this info is not easily accessible, but we found one heuristic "
+        "that seemed to work well. "
+        "We can filter appartments with a larger \"usable\" area than \"primary\" area "
+        "(bruksareal og primærrom). Then, most apartments we find have a balcony."
+    )
     query = f"""\
     SELECT {display_columns_string} 
     FROM boligdata
@@ -75,7 +81,7 @@ with sqlite3.connect('boligdata.db') as connection:
 
     # The ten cheapest apartments with short commute for both of us
     console.print("And a short commute")
-    console.print(Markdown("## The 10 cheapest apartments with a commute <20 minutes to both UiO and OsloMet"))
+    console.print(Markdown("## The 10 cheapest apartments with a short commute to both UiO and OsloMet"))
     query = f"""
     SELECT {display_columns_string}, "kollektivtid-uio", "kollektivtid-met"
     FROM boligdata
@@ -92,7 +98,7 @@ with sqlite3.connect('boligdata.db') as connection:
     print_table_from_cursor(c, console=console)
 
     # Some information about different regions in Oslo
-    console.print(Markdown("## Information about each postal zone"))
+    console.print(Markdown("## Information about the most expensive postal zones"))
     query = f"""
     SELECT
      postnummer,

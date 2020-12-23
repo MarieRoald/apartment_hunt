@@ -67,9 +67,11 @@ However, just because an apartment is cheap in total does not mean the price per
 │                  │ 3, 0170 Oslo,   │                 │           │           │            │               │               │
 │                  │ 0170 Oslo       │                 │           │           │            │               │               │
 └──────────────────┴─────────────────┴─────────────────┴───────────┴───────────┴────────────┴───────────────┴───────────────┘
-We are also interested in apartments with a balcony.
 
                                           <u style="text-decoration-style:single"><b>The 10 cheapest apartments with a balcony</b></u>                                          
+We are also interested in apartments with a balcony. Unfortunately, this info is not easily accessible, but we found one 
+heuristic that seemed to work well. We can filter appartments with a larger <font color="#4E9A06">&quot;usable&quot;</font> area than <font color="#4E9A06">&quot;primary&quot;</font> area <b>(</b>bruksareal og 
+primærrom<b>)</b>. Then, most apartments we find have a balcony.
  Query: 
 <i>    SELECT </i><font color="#4E9A06"><i>&quot;adresse&quot;</i></font><i>,</i><font color="#4E9A06"><i>&quot;felleskost/mnd.&quot;</i></font><i>,</i><font color="#4E9A06"><i>&quot;totalpris&quot;</i></font><i>,</i><font color="#4E9A06"><i>&quot;primærrom&quot;</i></font><i>,</i><font color="#4E9A06"><i>&quot;bruksareal&quot;</i></font><i>,</i><font color="#4E9A06"><i>&quot;sykkeltid-uio&quot;</i></font><i>,</i><font color="#4E9A06"><i>&quot;sykkeltid-met&quot;</i></font><i> </i>
 <i>    FROM boligdata</i>
@@ -96,7 +98,7 @@ We are also interested in apartments with a balcony.
 └────────────────────────────────────┴─────────────────┴───────────┴───────────┴────────────┴───────────────┴───────────────┘
 And a short commute
 
-                        <u style="text-decoration-style:single"><b>The 10 cheapest apartments with a commute &lt;20 minutes to both UiO and OsloMet</b></u>                        
+                           <u style="text-decoration-style:single"><b>The 10 cheapest apartments with a short commute to both UiO and OsloMet</b></u>                           
  Query: 
 
 <i>    SELECT </i><font color="#4E9A06"><i>&quot;adresse&quot;</i></font><i>,</i><font color="#4E9A06"><i>&quot;felleskost/mnd.&quot;</i></font><i>,</i><font color="#4E9A06"><i>&quot;totalpris&quot;</i></font><i>,</i><font color="#4E9A06"><i>&quot;primærrom&quot;</i></font><i>,</i><font color="#4E9A06"><i>&quot;bruksareal&quot;</i></font><i>,</i><font color="#4E9A06"><i>&quot;sykkeltid-uio&quot;</i></font><i>,</i><font color="#4E9A06"><i>&quot;sykkeltid-met&quot;</i></font><i>, </i>
@@ -149,7 +151,7 @@ And a short commute
 │ 0366 Oslo   │              │           │           │            │             │              │             │              │
 └─────────────┴──────────────┴───────────┴───────────┴────────────┴─────────────┴──────────────┴─────────────┴──────────────┘
 
-                                             <u style="text-decoration-style:single"><b>Information about each postal zone</b></u>                                              
+                                      <u style="text-decoration-style:single"><b>Information about the most expensive postal zones</b></u>                                      
  Query: 
 
 <i>    SELECT</i>
