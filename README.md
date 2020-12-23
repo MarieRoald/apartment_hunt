@@ -8,11 +8,13 @@ Once we had a list of all apartments from the search results page (so all local 
 
 To find the relevant HTML blocks for our scraper, we used the developer tools in Firefox. If you press the button left of the "Inspector" tab, you can select parts of the webpage and see its HTML tag.  
 
+## Finding commute times with the EnTur API
 The next step was to find the commute time for each apartment. To find these commute times, we first needed the apartment coordinates. Luckily, the Norwegian public transport company, [EnTur](https://entur.no/) has a public [GeoCoder API](https://developer.entur.org/pages-geocoder-api) which we can use for this task. Using it is as easy as a single GET request with an identifying header and requires no registration beforehand.
 
 Once we had the coordinates, we wanted the commute time to OsloMet and the University of Oslo. We walk, bike and take public transport to work, so those were the relevant times to find. Luckily, EnTur also has a free [JourneyPlanner API](https://developer.entur.org/pages-journeyplanner-journeyplanner-v2), which we can use to get walk distances and how long it takes to travel with different means of transport! The JourneyPlanner is a GraphQL API with an [easy-to-use editor](https://api.entur.io/journey-planner/v2/ide/) to explore the API and find the exact message to send with the POST requests.
 
-After collecting the relevant information from each apartment listing and the commute times, we saved it in a dictionary. So we had a list of dictionaries, with one dictionary per listing. The next step was to store this information in a database so that we could inspect it without spamming Finn.no with HTTP requests. We decided to use an SQLite database, which we created with the builtin [sqlite3](https://docs.python.org/3/library/sqlite3.html) module. To populate the database, we converted the list of dictionaries to a [Pandas](https://pandas.pydata.org/) DataFrame and used the `to_sql` method.
+## Creating a database
+After collecting the relevant information from each apartment listing and the commute times, we saved it in a dictionary. So we had a list of dictionaries, with one dictionary per listing. The next step was to store this information in a database so that we could inspect it without spamming Finn.no with HTTP requests. To create this database, we iterated over all the dictionaries and stored their keys and value types in another dictionary. From this, we could make a query to create a [SQLite](https://www.sqlite.org/index.html) database, with the builtin [sqlite3](https://docs.python.org/3/library/sqlite3.html) module.
 
 ## Finding interesting listings with SQL
 With the SQLite database ready, we wanted to explore it to find appealing apartments. With some short SQL queries, we could discover apartments within our budget, examine which apartments are cheapest per square meter, and explore which apartments have the best commute.
