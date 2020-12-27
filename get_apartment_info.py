@@ -13,6 +13,9 @@ from selenium import webdriver
 from tqdm import tqdm
 
 
+__author__ = "Marie Roald & Yngve Mardal Moe"
+
+
 def parse_price(price_string, currency="kr", divider="\xa0"):
     currency_stripped = price_string.strip(currency)
     return int(currency_stripped.replace(divider, ""))
