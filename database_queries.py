@@ -4,6 +4,9 @@ from rich.console import Console
 from rich.markdown import Markdown
 
 
+__author__ = "Marie Roald & Yngve Mardal Moe"
+
+
 def print_table_from_cursor(cursor, console=None):
     """Format the output from a SQL query as a table and print it.
     """
